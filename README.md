@@ -9,4 +9,4 @@ You can:
 - Add more data to `data` folder in condition that the audio samples are converted to 16000Hz sample rate and mono channel, `convert_wavs.py` does that.
 - Editing the emotions specified in `utils.py` in `AVAILABLE_EMOTIONS` constant.
 
-When you modified anything, you can run `ser.py` to retrain the model.
+When you modified anything , you can run `ser.py` to retrain the model.
