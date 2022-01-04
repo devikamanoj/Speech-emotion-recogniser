@@ -3,3 +3,5 @@ numpy
 soundfile==0.9.0
 sklearn
 pyaudio==0.2.11
+wheel
+numba==0.48
