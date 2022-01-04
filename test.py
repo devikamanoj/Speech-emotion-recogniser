@@ -1,11 +1,9 @@
 import pyaudio
-import os
 import wave
 import pickle
 from sys import byteorder
 from array import array
 from struct import pack
-from sklearn.neural_network import MLPClassifier
 
 from utils import extract_feature
 
@@ -16,9 +14,11 @@ RATE = 16000
 
 SILENCE = 30
 
+
 def is_silent(snd_data):
     "Returns 'True' if below the 'silent' threshold"
     return max(snd_data) < THRESHOLD
+
 
 def normalize(snd_data):
     "Average the volume out"
@@ -30,6 +30,7 @@ def normalize(snd_data):
         r.append(int(i*times))
     return r
 
+
 def trim(snd_data):
     "Trim the blank spots at the start and end"
     def _trim(snd_data):
@@ -37,7 +38,7 @@ def trim(snd_data):
         r = array('h')
 
         for i in snd_data:
-            if not snd_started and abs(i)>THRESHOLD:
+            if not snd_started and abs(i) > THRESHOLD:
                 snd_started = True
                 r.append(i)
 
@@ -54,12 +55,14 @@ def trim(snd_data):
     snd_data.reverse()
     return snd_data
 
+
 def add_silence(snd_data, seconds):
     "Add silence to the start and end of 'snd_data' of length 'seconds' (float)"
     r = array('h', [0 for i in range(int(seconds*RATE))])
     r.extend(snd_data)
     r.extend([0 for i in range(int(seconds*RATE))])
     return r
+
 
 def record():
     """
@@ -73,8 +76,8 @@ def record():
     """
     p = pyaudio.PyAudio()
     stream = p.open(format=FORMAT, channels=1, rate=RATE,
-        input=True, output=True,
-        frames_per_buffer=CHUNK_SIZE)
+                    input=True, output=True,
+                    frames_per_buffer=CHUNK_SIZE)
 
     num_silent = 0
     snd_started = False
@@ -108,6 +111,7 @@ def record():
     r = add_silence(r, 0.5)
     return sample_width, r
 
+
 def record_to_file(path):
     "Records from the microphone and outputs the resulting data to 'path'"
     sample_width, data = record()
@@ -121,7 +125,6 @@ def record_to_file(path):
     wf.close()
 
 
-
 if __name__ == "__main__":
     # load the saved model (after training)
     model = pickle.load(open("result/mlp_classifier.model", "rb"))
@@ -129,10 +132,31 @@ if __name__ == "__main__":
     filename = "test.wav"
     # record the file (start talking)
     record_to_file(filename)
+
+    print("Analysing the emotion\n")
     # extract features and reshape it
-    features = extract_feature(filename, mfcc=True, chroma=True, mel=True).reshape(1, -1)
+    features = extract_feature(
+        filename, mfcc=True, chroma=True, mel=True).reshape(1, -1)
     # predict
     result = model.predict(features)[0]
+
+    print("\n")
     # show the result !
-    print("result:", result)
-    
+    if result == "happy":
+        print("Looks like it's a fine day for you. Cheers!")
+        print("Emotion: happy 😄")
+
+    elif result == "angry":
+        print("Calm down Hulk!")
+        print("Emotion: angry 😡")
+
+    elif result == "sad":
+        print("Don't be sad. Remember, this too shall pass")
+        print("Emotion: sad ☹️")
+
+    elif result == "neutral":
+        print("Emotion: neutral 😐")
+
+    else:
+        print("Sorry! I couldn't read your emotion from the sound😔")
+    print("\n")
