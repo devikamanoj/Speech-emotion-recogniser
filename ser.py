@@ -1,6 +1,7 @@
+from numpy.lib.function_base import average
 from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import confusion_matrix
+
+from sklearn.metrics import accuracy_score, confusion_matrix, f1_score
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -12,7 +13,10 @@ from utils import load_data
 
 print("Loading dataset")
 # load RAVDESS dataset
+
+# y corresponds to emotion
 X_train, X_test, y_train, y_test = load_data(test_size=0.25)
+
 # print some details
 # number of samples in training data
 print("[+] Number of training samples:", X_train.shape[0])
@@ -41,12 +45,12 @@ model.fit(X_train, y_train)
 
 # predict 25% of data to measure how good we are
 y_pred = model.predict(X_test)
-
 # calculate the accuracy
 accuracy = accuracy_score(y_true=y_test, y_pred=y_pred)
 
 print("Accuracy: {:.2f}%".format(accuracy*100))
 
+print(f'F1 score: {f1_score(y_test, y_pred,average="micro")}')
 # now we save the model
 # make result directory if doesn't exist yet
 if not os.path.isdir("result"):
@@ -58,8 +62,10 @@ pickle.dump(model, open("result/mlp_classifier.model", "wb"))
 cm = confusion_matrix(y_test, y_pred, labels=model.classes_)
 sns.heatmap(cm, annot=True, cmap='Blues', fmt='')
 
-
-plt.yticks(plt.yticks()[0], labels=model.classes_, rotation=0)
+plt.xlabel="Predicted Label"
 plt.xticks(plt.xticks()[0], labels=model.classes_)
+
+plt.ylabel="Actual label"
+plt.yticks(plt.yticks()[0], labels=model.classes_, rotation=0)
 
 plt.show()

@@ -23,7 +23,7 @@ RAVDESS (Ryerson Audio-Visual Database of Emotional Speech and Song). Only the a
 You can:
  
 - Add more data to the folder `data`.
-- edit the emotions specified can be edited in `utils.py` in `AVAILABLE_EMOTIONS` constant.
+- edit the emotions specified in `AVAILABLE_EMOTIONS` constant at `utils.py`.
 
 ### Files included:
 
