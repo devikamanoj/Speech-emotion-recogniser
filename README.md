@@ -10,7 +10,8 @@ In this project, some libraries such as librosa, soundfile, and sklearn is used 
 
 The code works easily in python 3.8.x and there are compatibility issues in the python version 3.9
 
-##STEPS :
+## STEPS
+
 1) Load the data
 2) Extract features
 3) Split dataset into training and testing set
