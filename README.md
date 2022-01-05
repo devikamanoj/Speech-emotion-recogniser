@@ -45,6 +45,14 @@ You can:
 
 [Presentation Slides](https://docs.google.com/presentation/d/1ClvcQFMahFXRTfLWYMVtZs16s2Vgzat-s_iQCtyLyys/edit?usp=sharing)
 
+## EVALUATION METRICES
+
+TP = True Positives 
+TN = True Negatives
+FP = False Positives
+FN = False Negatives.
+
+$Accuracy = /frac{TP+TN}{TP+TN+FP+FN}$
 
 ## GROUP MEMBERS 
 
