@@ -19,12 +19,24 @@ The code works easily in python 3.8.x and there are compatibility issues in the 
 You can:
  
 - Add more data to the folder `data`.
-- The emotions specified can be edited in `utils.py` in `AVAILABLE_EMOTIONS` constant.
+- edit the emotions specified can be edited in `utils.py` in `AVAILABLE_EMOTIONS` constant.
 
 ### Files included:
 
 - requirements.txt - file that contains all the required dependencies for the project to run.
-- convert_wavs.py - A utility script used for converting audio samples to be suitable for feature extraction
-- ser.py - The actual speech emotion recogniser. It makes the model
 - test.py - The file that is to be run so that our voice is recorded and the emotion is identified
+- ser.py - The actual speech emotion recogniser. It makes the model
 - utils.py - The file that extracts features from the voice and classifies it into any one among angry, sad, neutral and happy
+- convert_wavs.py - A utility script used for converting audio samples to be suitable for feature extraction
+
+[Presentation Slides](https://docs.google.com/presentation/d/1ClvcQFMahFXRTfLWYMVtZs16s2Vgzat-s_iQCtyLyys/edit?usp=sharing)
+
+
+## GROUP MEMBERS 
+
+| NAME  | ROLL NUMBER |
+| ------------- | ------------- |
+| GAYATHRI P  | AM.EN.U4AIE20126  |
+| LAKSHMI WARRIER  | AM.EN.U4AIE20143   |
+| M DEVIKA  | AM.EN.U4AIE20144  |
+| NIVEDITA RAJESH  | AM.EN.U4AIE20153 |
