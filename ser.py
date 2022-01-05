@@ -1,10 +1,9 @@
-from numpy.lib.function_base import average
 from sklearn.neural_network import MLPClassifier
 
 from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, precision_score
+from sklearn.metrics import plot_confusion_matrix
 
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 import os
 import pickle
@@ -49,8 +48,10 @@ y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_true=y_test, y_pred=y_pred)
 
 print("Accuracy: {:.2f}%".format(accuracy*100))
+
 print(f'F1 score: {f1_score(y_test, y_pred,average="macro")}')
 print(f'Precision score: {precision_score(y_test, y_pred,average="macro")}')
+
 
 # now we save the model
 # make result directory if doesn't exist yet
@@ -61,12 +62,9 @@ pickle.dump(model, open("result/mlp_classifier.model", "wb"))
 
 
 cm = confusion_matrix(y_test, y_pred, labels=model.classes_)
-sns.heatmap(cm, annot=True, cmap='Blues', fmt='')
 
-plt.xlabel="Predicted Label"
-plt.xticks(plt.xticks()[0], labels=model.classes_)
-
-plt.ylabel="Actual label"
-plt.yticks(plt.yticks()[0], labels=model.classes_, rotation=0)
-
+matrix = plot_confusion_matrix(model, X_test, y_test,
+                                 cmap=plt.cm.Blues,
+                                 normalize='true')
+plt.title('Confusion matrix for the classifier')
 plt.show()
