@@ -10,6 +10,10 @@ In this project, some libraries such as librosa, soundfile, and sklearn is used 
 
 The code works easily in python 3.8.x and there are compatibility issues in the python version 3.9
 
+## DATASET
+
+RAVDESS (Ryerson Audio-Visual Database of Emotional Speech and Song). Only the audio files are used.
+
 ## IMPLEMENTATION 
 
 - Import necessary libraries by running `pip3 install -r requirements.txt` .
