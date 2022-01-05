@@ -1,4 +1,4 @@
-# How to Make a Speech Emotion Recognizer Using Python And Scikit-learn
+# Speech Emotion Recognizer Using Python And Scikit-learn
 To run this, you need to:
 - `pip3 install -r requirements.txt`
 
