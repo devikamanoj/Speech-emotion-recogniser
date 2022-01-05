@@ -63,8 +63,8 @@ Accuracy = {TP+TN}/{TP+TN+FP+FN}
           <td><img height="100" src="https://github.com/devikamanoj/Speech-emotion-recogniser/blob/main/images/happy.png" /><br /><center><b>Emotion: Happy :smile:</b></center></td>
      </tr>
      <tr>
-          <td><img height="100" src="https://github.com/devikamanoj/Speech-emotion-recogniser/blob/main/images/neutral.png" /><br /><center><b>Emotion: Neutral :neutral_face:</b></center></td>
-          <td><img height="100" src="https://github.com/devikamanoj/Speech-emotion-recogniser/blob/main/images/sad.png" /><br /><center><b>Emotion: Sad :frowning_face:</b></center></td>
+          <td><img height="80" src="https://github.com/devikamanoj/Speech-emotion-recogniser/blob/main/images/neutral.png" /><br /><center><b>Emotion: Neutral :neutral_face:</b></center></td>
+          <td><img height="80" src="https://github.com/devikamanoj/Speech-emotion-recogniser/blob/main/images/sad.png" /><br /><center><b>Emotion: Sad :frowning_face:</b></center></td>
      </tr>
 
 </table>
