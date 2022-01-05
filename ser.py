@@ -1,11 +1,16 @@
 from sklearn.neural_network import MLPClassifier
-
 from sklearn.metrics import accuracy_score
-from utils import load_data
+from sklearn.metrics import confusion_matrix
+
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 import os
 import pickle
 
+from utils import load_data
+
+print("Loading dataset")
 # load RAVDESS dataset
 X_train, X_test, y_train, y_test = load_data(test_size=0.25)
 # print some details
@@ -14,17 +19,17 @@ print("[+] Number of training samples:", X_train.shape[0])
 # number of samples in testing data
 print("[+] Number of testing samples:", X_test.shape[0])
 # number of features used
-# this is a vector of features extracted 
+# this is a vector of features extracted
 # using utils.extract_features() method
 print("[+] Number of features:", X_train.shape[1])
 # best model, determined by a grid search
 model_params = {
     'alpha': 0.01,
     'batch_size': 256,
-    'epsilon': 1e-08, 
-    'hidden_layer_sizes': (300,), 
-    'learning_rate': 'adaptive', 
-    'max_iter': 500, 
+    'epsilon': 1e-08,
+    'hidden_layer_sizes': (300,),
+    'learning_rate': 'adaptive',
+    'max_iter': 500,
 }
 # initialize Multi Layer Perceptron classifier
 # with best parameters ( so far )
@@ -48,3 +53,13 @@ if not os.path.isdir("result"):
     os.mkdir("result")
 
 pickle.dump(model, open("result/mlp_classifier.model", "wb"))
+
+
+cm = confusion_matrix(y_test, y_pred, labels=model.classes_)
+sns.heatmap(cm, annot=True, cmap='Blues', fmt='')
+
+
+plt.yticks(plt.yticks()[0], labels=model.classes_, rotation=0)
+plt.xticks(plt.xticks()[0], labels=model.classes_)
+
+plt.show()
