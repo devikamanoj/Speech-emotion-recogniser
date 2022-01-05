@@ -8,6 +8,7 @@ To build a model to recognize emotion from speech using the Librosa and NumPy li
 
 In this project, some libraries such as librosa, soundfile, and sklearn is used to build a model using the MLPClassifier.  It is a system through which various audio speech files can be classified into different emotions such as happy, sad, anger and neutral by computers.
 
+The code works easily in python 3.8.x and there are compatibility issues in the python version 3.9
 
 ## IMPLEMENTATION 
 
