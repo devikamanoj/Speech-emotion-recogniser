@@ -68,3 +68,4 @@ matrix = plot_confusion_matrix(model, X_test, y_test,
                                  normalize='true')
 plt.title('Confusion matrix for the classifier')
 plt.show()
+

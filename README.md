@@ -10,6 +10,16 @@ In this project, some libraries such as librosa, soundfile, and sklearn is used 
 
 The code works easily in python 3.8.x and there are compatibility issues in the python version 3.9
 
+## STEPS
+
+1) Load the data
+2) Extract features
+3) Split dataset into training and testing set
+4) Initialize the MLPClassifier 
+5) Train the model
+6) Calculate accuracy
+
+
 ## DATASET
 
 RAVDESS (Ryerson Audio-Visual Database of Emotional Speech and Song). Only the audio files are used.
@@ -35,6 +45,14 @@ You can:
 
 [Presentation Slides](https://docs.google.com/presentation/d/1ClvcQFMahFXRTfLWYMVtZs16s2Vgzat-s_iQCtyLyys/edit?usp=sharing)
 
+## EVALUATION METRICES
+
+TP = True Positives 
+TN = True Negatives
+FP = False Positives
+FN = False Negatives.
+
+Accuracy = {TP+TN}/{TP+TN+FP+FN}
 
 ## GROUP MEMBERS 
 
