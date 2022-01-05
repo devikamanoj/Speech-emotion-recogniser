@@ -20,7 +20,7 @@ def is_silent(snd_data):
     return max(snd_data) < THRESHOLD
 
 
-def normalize(snd_data):
+def normalise(snd_data):
     "Average the volume out"
     MAXIMUM = 16384
     times = float(MAXIMUM)/max(abs(i) for i in snd_data)
@@ -32,7 +32,7 @@ def normalize(snd_data):
 
 
 def trim(snd_data):
-    "Trim the blank spots at the start and end"
+    "Trim the silence at both the ends"
     def _trim(snd_data):
         snd_started = False
         r = array('h')
@@ -69,10 +69,9 @@ def record():
     Record a word or words from the microphone and 
     return the data as an array of signed shorts.
 
-    Normalizes the audio, trims silence from the 
+    Normalises the audio, trims silence from the 
     start and end, and pads with 0.5 seconds of 
-    blank sound to make sure VLC et al can play 
-    it without getting chopped off.
+    blank sound.
     """
     p = pyaudio.PyAudio()
     stream = p.open(format=FORMAT, channels=1, rate=RATE,
@@ -85,7 +84,8 @@ def record():
     r = array('h')
 
     while 1:
-        # little endian, signed short
+        #this loop will run till sound is detected
+
         snd_data = array('h', stream.read(CHUNK_SIZE))
         if byteorder == 'big':
             snd_data.byteswap()
@@ -95,10 +95,15 @@ def record():
 
         if silent and snd_started:
             num_silent += 1
+            #adding an extra second to know the seconds of silence 
+
         elif not silent and not snd_started:
+            #sound started
             snd_started = True
+            
 
         if snd_started and num_silent > SILENCE:
+            #sound ends after 30 iterations without sound
             break
 
     sample_width = p.get_sample_size(FORMAT)
@@ -106,8 +111,7 @@ def record():
     stream.close()
     p.terminate()
 
-    r = normalize(r)
-    r = trim(r)
+    r = trim(normalise(r))
     r = add_silence(r, 0.5)
     return sample_width, r
 

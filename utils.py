@@ -25,17 +25,10 @@ AVAILABLE_EMOTIONS = {
     "happy"
 }
 
+
 def extract_feature(file_name, **kwargs):
     """
-    Extract feature from audio file `file_name`
-        Features supported:
-            - MFCC (mfcc)
-            - Chroma (chroma)
-            - MEL Spectrogram Frequency (mel)
-            - Contrast (contrast)
-            - Tonnetz (tonnetz)
-        e.g:
-        `features = extract_feature(path, mel=True, mfcc=True)`
+    Extract features (mfcc, chroma, mel, contrast, tonnetz) from audio file `file_name`
     """
     mfcc = kwargs.get("mfcc")
     chroma = kwargs.get("chroma")
@@ -49,19 +42,24 @@ def extract_feature(file_name, **kwargs):
             stft = np.abs(librosa.stft(X))
         result = np.array([])
         if mfcc:
-            mfccs = np.mean(librosa.feature.mfcc(y=X, sr=sample_rate, n_mfcc=40).T, axis=0)
+            mfccs = np.mean(librosa.feature.mfcc(
+                y=X, sr=sample_rate, n_mfcc=40).T, axis=0)
             result = np.hstack((result, mfccs))
         if chroma:
-            chroma = np.mean(librosa.feature.chroma_stft(S=stft, sr=sample_rate).T,axis=0)
+            chroma = np.mean(librosa.feature.chroma_stft(
+                S=stft, sr=sample_rate).T, axis=0)
             result = np.hstack((result, chroma))
         if mel:
-            mel = np.mean(librosa.feature.melspectrogram(X, sr=sample_rate).T,axis=0)
+            mel = np.mean(librosa.feature.melspectrogram(
+                X, sr=sample_rate).T, axis=0)
             result = np.hstack((result, mel))
         if contrast:
-            contrast = np.mean(librosa.feature.spectral_contrast(S=stft, sr=sample_rate).T,axis=0)
+            contrast = np.mean(librosa.feature.spectral_contrast(
+                S=stft, sr=sample_rate).T, axis=0)
             result = np.hstack((result, contrast))
         if tonnetz:
-            tonnetz = np.mean(librosa.feature.tonnetz(y=librosa.effects.harmonic(X), sr=sample_rate).T,axis=0)
+            tonnetz = np.mean(librosa.feature.tonnetz(
+                y=librosa.effects.harmonic(X), sr=sample_rate).T, axis=0)
             result = np.hstack((result, tonnetz))
     return result
 
@@ -73,7 +71,8 @@ def load_data(test_size=0.2):
         basename = os.path.basename(file)
         # get the emotion label
         emotion = int2emotion[basename.split("-")[2]]
-        # we allow only AVAILABLE_EMOTIONS we set
+
+        # this model detects only the 4 emotions mentioned
         if emotion not in AVAILABLE_EMOTIONS:
             continue
         # extract speech features
@@ -83,4 +82,3 @@ def load_data(test_size=0.2):
         y.append(emotion)
     # split the data to training and testing and return it
     return train_test_split(np.array(X), y, test_size=test_size, random_state=7)
-
