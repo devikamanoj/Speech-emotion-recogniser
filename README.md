@@ -15,7 +15,6 @@ The code works easily in python 3.8.x and there are compatibility issues in the 
 - Import necessary libraries by running `pip3 install -r requirements.txt` .
 - If you are using the code for the first time run `ser.py` , to make the model and it will be stored in `result`.
 - To know the emotion run `test.py` .
-- `convert_wavs.py` converts all the audio samples to 16000Hz sample rate and mono channel
 
 You can:
  
