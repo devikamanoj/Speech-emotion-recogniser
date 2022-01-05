@@ -54,6 +54,31 @@ FN = False Negatives.
 
 Accuracy = {TP+TN}/{TP+TN+FP+FN}
 
+## OUTPUTS
+
+ ### Emotion detection
+<table>
+     <tr>
+          <td><img height="100" src="https://github.com/devikamanoj/Speech-emotion-recogniser/blob/main/images/angry.png" /><br /><center><b>Emotion: Angry :rage:</b></center></td>
+          <td><img height="100" src="https://github.com/devikamanoj/Speech-emotion-recogniser/blob/main/images/happy.png" /><br /><center><b>Emotion: Happy :smile:</b></center></td>
+     </tr>
+     <tr>
+          <td><img height="100" src="https://github.com/devikamanoj/Speech-emotion-recogniser/blob/main/images/neutral.png" /><br /><center><b>Emotion: Neutral :neutral_face:</b></center></td>
+          <td><img height="100" src="https://github.com/devikamanoj/Speech-emotion-recogniser/blob/main/images/sad.png" /><br /><center><b>Emotion: Sad :frowning_face:</b></center></td>
+     </tr>
+
+</table>
+ 
+ ### Evaluation metrics of classifier
+ 
+ <table>
+     <tr>
+          <td><img height="100" src="https://github.com/devikamanoj/Speech-emotion-recogniser/blob/main/images/ser_OP.png" /><br /><center><b> </b></center></td>
+          <td><img height="200" src="https://github.com/devikamanoj/Speech-emotion-recogniser/blob/main/images/ser_cm_OP.png" /><br /><center><b></b></center></td>
+     </tr>
+ </table>
+ 
+
 ## GROUP MEMBERS 
 
 | NAME  | ROLL NUMBER |
