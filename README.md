@@ -52,8 +52,7 @@ TN = True Negatives
 FP = False Positives
 FN = False Negatives.
 
-$$x_{1,2} = \frac{-b \pm \sqrt{b^2-4ac}}{2b}.$$
-$Accuracy = /frac{TP+TN}{TP+TN+FP+FN}$
+Accuracy = {TP+TN}/{TP+TN+FP+FN}
 
 ## GROUP MEMBERS 
 
