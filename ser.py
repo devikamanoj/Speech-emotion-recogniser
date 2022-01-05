@@ -1,6 +1,6 @@
 from sklearn.neural_network import MLPClassifier
 
-from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, precision_score
+from sklearn.metrics import accuracy_score, f1_score, precision_score
 from sklearn.metrics import plot_confusion_matrix
 
 import matplotlib.pyplot as plt
@@ -59,9 +59,6 @@ if not os.path.isdir("result"):
     os.mkdir("result")
 
 pickle.dump(model, open("result/mlp_classifier.model", "wb"))
-
-
-cm = confusion_matrix(y_test, y_pred, labels=model.classes_)
 
 matrix = plot_confusion_matrix(model, X_test, y_test,
                                  cmap=plt.cm.Blues,
