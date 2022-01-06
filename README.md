@@ -45,17 +45,9 @@ You can:
 
 [Presentation Slides](https://docs.google.com/presentation/d/1ClvcQFMahFXRTfLWYMVtZs16s2Vgzat-s_iQCtyLyys/edit?usp=sharing)
 
-## EVALUATION METRICES
-
-TP = True Positives 
-TN = True Negatives
-FP = False Positives
-FN = False Negatives.
-
-Accuracy = {TP+TN}/{TP+TN+FP+FN}
 
 ## OUTPUTS
-
+An accuracy of range 65-80% is obtained
  ### Emotion detection
 <table>
      <tr>
