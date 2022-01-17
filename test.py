@@ -1,8 +1,8 @@
 #  Records voice
 
-import pyaudio
+import pyaudio #to get audio from the user
 import wave
-import pickle
+import pickle #for saving the model
 from sys import byteorder
 from array import array
 from struct import pack
@@ -71,7 +71,7 @@ def record():
     Record a word or words from the microphone and return the data as an array of signed shorts.
 
     Normalises the audio, trims silence from the start and end, and pads with 0.5 seconds of blank sound.
-    
+
     """
     p = pyaudio.PyAudio()
     stream = p.open(format=FORMAT, channels=1, rate=RATE,input=True, output=True, frames_per_buffer=CHUNK_SIZE)
@@ -139,8 +139,10 @@ if __name__ == "__main__":
 
     print(" Analysing the emotion.....\n")
 
-    # extract features and reshape it
-    features = extract_feature(filename, mfcc=True, chroma=True, mel=True).reshape(1, -1)
+    # extract features and reshape it 
+    # As a result we get training arrays, which is used as classifiers to predict emotion
+    features = extract_feature(filename, mfcc=True, chroma=True, mel=True).reshape(1, -1) 
+
     # predict
     result = model.predict(features)[0]
 

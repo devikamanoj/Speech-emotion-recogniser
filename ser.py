@@ -1,7 +1,7 @@
 #  Train the model wrt dataset
 
-from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import accuracy_score, f1_score, precision_score, plot_confusion_matrix
+from sklearn.neural_network import MLPClassifier #to make model
+from sklearn.metrics import accuracy_score, f1_score, precision_score, plot_confusion_matrix #for evaluation metrices
 import matplotlib.pyplot as plt
 
 import os
@@ -13,16 +13,18 @@ from utils import load_data
 print("\n")
 print("   !!! LOADING DATASET !!!")
 print("\n")
+
 # y corresponds to emotion
+# x for feature
 X_train, X_test, y_train, y_test = load_data(test_size=0.25)
 
 # print some details
-print("[+] Number of training samples:", X_train.shape[0])
-print("[+] Number of testing samples:", X_test.shape[0])
+print(" Number of training samples:", X_train.shape[0])
+print(" Number of testing samples:", X_test.shape[0])
 
 # this is a vector of features extracted
 # using utils.extract_features() method
-print("[+] Number of features:", X_train.shape[1])
+print(" Number of features:", X_train.shape[1])
 
 # best model, determined by a grid search
 model_params = {
@@ -59,6 +61,7 @@ print(f'Precision score: {precision_score(y_test, y_pred,average="macro")}')
 if not os.path.isdir("result"):
     os.mkdir("result")
 
+# for future use, the model is saved using pickle module
 pickle.dump(model, open("result/mlp_classifier.model", "wb"))
 
 plot_confusion_matrix(model, X_test, y_test,cmap=plt.cm.Blues, normalize='true')
