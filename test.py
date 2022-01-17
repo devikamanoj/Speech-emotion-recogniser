@@ -1,3 +1,5 @@
+#  Records voice
+
 import pyaudio
 import wave
 import pickle
@@ -7,9 +9,9 @@ from struct import pack
 
 from utils import extract_feature
 
-THRESHOLD = 500
+THRESHOLD = 500 #audio levels not normalised
 CHUNK_SIZE = 1024
-FORMAT = pyaudio.paInt16
+FORMAT = pyaudio.paInt16 #signed 16-bit binary string
 RATE = 16000
 
 SILENCE = 30
@@ -66,17 +68,13 @@ def add_silence(snd_data, seconds):
 
 def record():
     """
-    Record a word or words from the microphone and 
-    return the data as an array of signed shorts.
+    Record a word or words from the microphone and return the data as an array of signed shorts.
 
-    Normalises the audio, trims silence from the 
-    start and end, and pads with 0.5 seconds of 
-    blank sound.
+    Normalises the audio, trims silence from the start and end, and pads with 0.5 seconds of blank sound.
+    
     """
     p = pyaudio.PyAudio()
-    stream = p.open(format=FORMAT, channels=1, rate=RATE,
-                    input=True, output=True,
-                    frames_per_buffer=CHUNK_SIZE)
+    stream = p.open(format=FORMAT, channels=1, rate=RATE,input=True, output=True, frames_per_buffer=CHUNK_SIZE)
 
     num_silent = 0
     snd_started = False
@@ -130,37 +128,39 @@ def record_to_file(path):
 
 
 if __name__ == "__main__":
+
     # load the saved model (after training)
     model = pickle.load(open("result/mlp_classifier.model", "rb"))
-    print("Please talk")
+    print(" Please talk: ")
     filename = "test.wav"
+
     # record the file (start talking)
     record_to_file(filename)
 
-    print("Analysing the emotion\n")
+    print(" Analysing the emotion.....\n")
+
     # extract features and reshape it
-    features = extract_feature(
-        filename, mfcc=True, chroma=True, mel=True).reshape(1, -1)
+    features = extract_feature(filename, mfcc=True, chroma=True, mel=True).reshape(1, -1)
     # predict
     result = model.predict(features)[0]
 
     print("\n")
     # show the result !
     if result == "happy":
-        print("Looks like it's a fine day for you. Cheers!")
-        print("Emotion: happy 😄")
+        print(" Looks like it's a fine day for you. Cheers!")
+        print(" Emotion: Happy 😄")
 
     elif result == "angry":
-        print("Calm down Hulk!")
-        print("Emotion: angry 😡")
+        print(" Calm down Hulk!")
+        print(" Emotion: angry 😡")
 
     elif result == "sad":
-        print("Don't be sad. Remember, this too shall pass")
-        print("Emotion: sad ☹️")
+        print(" Don't be sad. Remember, this too shall pass")
+        print(" Emotion: sad ☹️")
 
     elif result == "neutral":
-        print("Emotion: neutral 😐")
+        print(" Emotion: neutral 😐")
 
     else:
-        print("Sorry! I couldn't read your emotion from the sound😔")
+        print(" Sorry! I couldn't read your emotion from the sound😔")
     print("\n")

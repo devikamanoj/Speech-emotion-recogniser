@@ -1,3 +1,5 @@
+# to extract deatures from the recorded sound
+
 import soundfile
 import numpy as np
 import librosa

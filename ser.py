@@ -1,3 +1,5 @@
+#  Train the model wrt dataset
+
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, f1_score, precision_score, plot_confusion_matrix
 import matplotlib.pyplot as plt
@@ -8,8 +10,9 @@ import pickle
 from utils import load_data
 
 # load RAVDESS dataset
-print("Loading dataset")
-
+print("\n")
+print("   !!! LOADING DATASET !!!")
+print("\n")
 # y corresponds to emotion
 X_train, X_test, y_train, y_test = load_data(test_size=0.25)
 
@@ -34,7 +37,9 @@ model_params = {
 model = MLPClassifier(**model_params)
 
 # train the model
-print("[*] Training the model...")
+print()
+print("   !!! TRAINING THE MODEL !!!")
+print("\n")
 model.fit(X_train, y_train)
 
 # predict 25% of data
@@ -43,6 +48,9 @@ y_pred = model.predict(X_test)
 # evaluation metrics
 accuracy = accuracy_score(y_true=y_test, y_pred=y_pred)
 
+print("\n")
+print(" EVALUATION METRICES: ")
+print("\n")
 print("Accuracy: {:.2f}%".format(accuracy*100))
 print(f'F1 score: {f1_score(y_test, y_pred,average="macro")}')
 print(f'Precision score: {precision_score(y_test, y_pred,average="macro")}')
@@ -53,8 +61,6 @@ if not os.path.isdir("result"):
 
 pickle.dump(model, open("result/mlp_classifier.model", "wb"))
 
-plot_confusion_matrix(model, X_test, y_test,
-                      cmap=plt.cm.Blues,
-                      normalize='true')
+plot_confusion_matrix(model, X_test, y_test,cmap=plt.cm.Blues, normalize='true')
 plt.title('Confusion matrix for the classifier')
 plt.show()
