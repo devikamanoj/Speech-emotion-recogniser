@@ -6,6 +6,7 @@ import pickle #for saving the model
 from sys import byteorder
 from array import array
 from struct import pack
+import numpy as np
 
 from utils import extract_feature
 
@@ -130,7 +131,7 @@ def record_to_file(path):
 if __name__ == "__main__":
 
     # load the saved model (after training)
-    model = pickle.load(open("result/mlp_classifier.model", "rb"))
+    model = pickle.load(open("C:/Users/adith/Downloads/Speech-emotion-recogniser-main/Speech-emotion-recogniser-main/result/mlp_classifier.model", "rb"))
     print(" Please talk: ")
     filename = "test.wav"
 
@@ -142,6 +143,7 @@ if __name__ == "__main__":
     # extract features and reshape it 
     # As a result we get training arrays, which is used as classifiers to predict emotion
     features = extract_feature(filename, mfcc=True, chroma=True, mel=True).reshape(1, -1) 
+
 
     # predict
     result = model.predict(features)[0]
